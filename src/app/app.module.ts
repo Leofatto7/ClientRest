@@ -22,6 +22,7 @@ import { DELETErequestComponent } from './deleterequest/deleterequest.component'
     AppComponent,
     GETrequestComponent,
     POSTrequestComponent,
+    
     DELETErequestComponent
   ],
   imports: [
