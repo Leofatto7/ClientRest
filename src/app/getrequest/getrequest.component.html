@@ -1,0 +1,24 @@
+<mat-form-field class="inputGET" hideRequiredMarker appearance="fill">
+    <mat-label>URL</mat-label>
+    <input matInput #URLget required>
+</mat-form-field><br>
+ <button (click)="getRequest(URLget.value);mostra();" class="buttonGET" mat-button>GET</button><br>
+
+<table hidden id="tabella" class="DataTable">
+    <thead>
+        <tr>
+          <th>UserId</th>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Body</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let campo of data | async">
+        <td>{{ campo.userId }}</td>
+        <td>{{ campo.id }}</td>
+        <td>{{ campo.title }}</td>
+        <td>{{ campo.body }}</td>
+      </tr>
+    </tbody>
+</table>
