@@ -1,0 +1,10 @@
+.inputPOST {
+    width: 500px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.buttonPOST {
+    margin-left: 20px;
+    background-color: rgba(38, 0, 255, 0.39);
+}

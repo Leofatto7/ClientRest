@@ -1,11 +1,10 @@
-
-.inputDELETE {
+.inputPUT {
     width: 500px;
     margin-top: 20px;
     margin-left: 20px;
-  }
-  
-  .buttonDELETE{
+}
+
+.buttonPUT {
     margin-left: 20px;
     background-color: rgba(38, 0, 255, 0.39);
-  }
+}

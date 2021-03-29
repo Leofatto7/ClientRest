@@ -23,7 +23,9 @@
     "@angular/platform-browser-dynamic": "~11.2.6",
     "@angular/router": "~11.2.6",
     "bootstrap": "^4.6.0",
+    "class-transformer": "^0.4.0",
     "hammerjs": "^2.0.8",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

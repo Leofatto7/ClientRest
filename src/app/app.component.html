@@ -1,20 +1,15 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-      <span>Client REST</span>
+    <mat-toolbar-row>
+        <span>Client REST</span>
 
-      <div class="spacer"></div>
+        <div class="spacer"></div>
 
-      <a mat-button routerLink="/get" routerLinkActive="active">GET</a>
-      <a mat-button routerLink="/post" routerLinkActive="active">POST</a>
-      <a mat-button routerLink="/delete" routerLinkActive="active">DELETE</a>
-      <a mat-button>UPDATE</a>
-      
-  </mat-toolbar-row>
+        <a mat-button routerLink="/get" routerLinkActive="active">GET</a>
+        <a mat-button routerLink="/post" routerLinkActive="active">POST</a>
+        <a mat-button routerLink="/delete" routerLinkActive="active">DELETE</a>
+        <a mat-button routerLink="/put" routerLinkActive="active">UPDATE</a>
+
+    </mat-toolbar-row>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
-
-<!-- 
- <button (click)="createData()">Create data</button>
-{{ newData | async | json }} 
---> 

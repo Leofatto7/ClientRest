@@ -2,23 +2,32 @@
     <mat-label>URL</mat-label>
     <input matInput #URLget required>
 </mat-form-field><br>
- <button (click)="getRequest(URLget.value);mostra();" class="buttonGET" mat-button>GET</button><br>
+
+<button (click)="getRequest(URLget.value); mostra();" class="buttonGET" mat-button>GET</button><br>
 
 <table hidden id="tabella" class="DataTable">
     <thead>
         <tr>
-          <th>UserId</th>
-          <th>Id</th>
-          <th>Title</th>
-          <th>Body</th>
+            <th>Id</th>
+            <th>Data Ora</th>
+            <th>Temperatura A</th>
+            <th>Umidit&agrave; A</th>
+            <th>Temperatura B</th>
+            <th>Umidit&agrave; B</th>
+            <th>Temperatura Esterna</th>
+            <th>Umidit&agrave; Esterna</th>
         </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let campo of data | async">
-        <td>{{ campo.userId }}</td>
-        <td>{{ campo.id }}</td>
-        <td>{{ campo.title }}</td>
-        <td>{{ campo.body }}</td>
-      </tr>
+        <tr *ngFor="let campo of data | async ">
+            <td>{{ campo.id }}</td>
+            <td>{{ campo.datetime }}</td>
+            <td>{{ campo.aTemp }}</td>
+            <td>{{ campo.aHum }}</td>
+            <td>{{ campo.bTemp }}</td>
+            <td>{{ campo.bHum }}</td>
+            <td>{{ campo.extTemp }}</td>
+            <td>{{ campo.extHum }}</td>
+        </tr>
     </tbody>
 </table>

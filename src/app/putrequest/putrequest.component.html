@@ -1,0 +1,26 @@
+<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
+    <mat-label>Temperatura A</mat-label>
+    <input matInput #tempA required>
+</mat-form-field>
+<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
+    <mat-label>Umidit&agrave; A</mat-label>
+    <input matInput #humA required>
+</mat-form-field>
+<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
+    <mat-label>Temperatura B</mat-label>
+    <input matInput #tempB required>
+</mat-form-field>
+<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
+    <mat-label>Umidit&agrave; B</mat-label>
+    <input matInput #humB required>
+</mat-form-field>
+<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
+    <mat-label>Temperatura Esterna</mat-label>
+    <input matInput #tempExt required>
+</mat-form-field>
+<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
+    <mat-label>Umidit&agrave; Esterna</mat-label>
+    <input matInput #humExt required>
+</mat-form-field>
+<br>
+<button (click)="putRequest(tempA.value,humA.value,tempB.value,humB.value,tempExt.value,humExt.value)" class="buttonPUT" mat-button>PUT</button><br>

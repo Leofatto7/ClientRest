@@ -1,1 +1,6 @@
-<p>deleterequest works!</p>
+<mat-form-field class="inputDELETE" hideRequiredMarker appearance="fill">
+    <mat-label>URL</mat-label>
+    <input matInput #URLdelete required>
+</mat-form-field><br>
+
+<button (click)="deleteRequest(URLdelete.value)" class="buttonDELETE" mat-button>DELETE</button><br>
