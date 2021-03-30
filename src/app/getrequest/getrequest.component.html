@@ -1,33 +1,53 @@
-<mat-form-field class="inputGET" hideRequiredMarker appearance="fill">
-    <mat-label>URL</mat-label>
-    <input matInput #URLget required>
-</mat-form-field><br>
+<div class="row">
+    <mat-form-field class="inputGET" hideRequiredMarker appearance="fill">
+        <mat-label>URL</mat-label>
+        <input matInput #url required>
+    </mat-form-field>
+    <button (click)="get(url.value);" class="buttonGET" mat-button>
+        GET
+    </button>
+</div>
 
-<button (click)="getRequest(URLget.value); mostra();" class="buttonGET" mat-button>GET</button><br>
+<div *ngIf="requestSent">
+    <div *ngIf="hasData">
+        <table mat-table [dataSource]="data.data">
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay" [class.tableHeader]="true"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let observation"> {{observation.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="datetime">
+                <th mat-header-cell *matHeaderCellDef> Datetime </th>
+                <td mat-cell *matCellDef="let observation"> {{observation.datetime}} </td>
+            </ng-container>
+            <ng-container matColumnDef="aTemp">
+                <th mat-header-cell *matHeaderCellDef> ATemp </th>
+                <td mat-cell *matCellDef="let observation"> {{observation.aTemp}} </td>
+            </ng-container>
+            <ng-container matColumnDef="aHum">
+                <th mat-header-cell *matHeaderCellDef> AHum </th>
+                <td mat-cell *matCellDef="let observation"> {{observation.aHum}} </td>
+            </ng-container>
+            <ng-container matColumnDef="bTemp">
+                <th mat-header-cell *matHeaderCellDef> BTemp </th>
+                <td mat-cell *matCellDef="let observation"> {{observation.bTemp}} </td>
+            </ng-container>
+            <ng-container matColumnDef="bHum">
+                <th mat-header-cell *matHeaderCellDef> BHum </th>
+                <td mat-cell *matCellDef="let observation"> {{observation.bHum}} </td>
+            </ng-container>
+            <ng-container matColumnDef="extTemp">
+                <th mat-header-cell *matHeaderCellDef> EXTTemp </th>
+                <td mat-cell *matCellDef="let observation"> {{observation.extTemp}} </td>
+            </ng-container>
+            <ng-container matColumnDef="extHum">
+                <th mat-header-cell *matHeaderCellDef> EXTHum </th>
+                <td mat-cell *matCellDef="let observation"> {{observation.extHum}} </td>
+            </ng-container>
+        </table>
+    </div>
+    <div *ngIf="hasMessage">
 
-<table hidden id="tabella" class="DataTable">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Data Ora</th>
-            <th>Temperatura A</th>
-            <th>Umidit&agrave; A</th>
-            <th>Temperatura B</th>
-            <th>Umidit&agrave; B</th>
-            <th>Temperatura Esterna</th>
-            <th>Umidit&agrave; Esterna</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let campo of data | async ">
-            <td>{{ campo.id }}</td>
-            <td>{{ campo.datetime }}</td>
-            <td>{{ campo.aTemp }}</td>
-            <td>{{ campo.aHum }}</td>
-            <td>{{ campo.bTemp }}</td>
-            <td>{{ campo.bHum }}</td>
-            <td>{{ campo.extTemp }}</td>
-            <td>{{ campo.extHum }}</td>
-        </tr>
-    </tbody>
-</table>
+    </div>
+</div>

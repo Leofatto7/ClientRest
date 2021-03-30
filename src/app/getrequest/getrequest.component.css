@@ -10,39 +10,15 @@
   background-color: rgba(38, 0, 255, 0.39);
 }
 
-table.DataTable {
-    font-family: "Times New Roman", Times, serif;
-    border: 1px solid #FFFFFF;
-    text-align: center;
-    border-collapse: collapse;
-    margin-left: 20px;
-    margin-top: 20px;
-    margin-right: 20px;
-  }
-
-table.DataTable td, table.DataTable th {
-    border: 1px solid #FFFFFF;
-    padding: 3px 2px;
+.row {
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  margin: 20px;
+  height: auto;
 }
 
-table.DataTable tbody td {
-    font-size: 16px;
-  }
-
-  table.DataTable tr:nth-child(even) {
-    background: #D0E4F5;
-  }
-  table.DataTable thead {
-    background: rgba(38, 0, 255, 0.39);
-    border-bottom: 5px solid #FFFFFF;
-  }
-  table.DataTable thead th {
-    font-size: 17px;
-    font-weight: normal;
-    color: #000000;
-    text-align: center;
-    border-left: 2px solid #FFFFFF;
-  }
-  table.DataTable thead th:first-child {
-    border-left: none;
-  }
+table {
+  width: 100%;
+  margin-top: 20px;
+}

@@ -1,7 +1,5 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { plainToClass, plainToClassFromExist } from 'class-transformer';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 
 export interface Response {
   status: number;
@@ -27,22 +25,29 @@ export interface Observation {
 })
 
 export class GETrequestComponent {
-  //data!: Response;
-  data: Observable<any> | undefined;
+  data!: Response;
+  requestSent: boolean = false;
+  hasData!: boolean;
+  hasMessage!: boolean;
+  columnsToDisplay: string[] = ['id', 'datetime', 'aTemp', 'aHum', 'bTemp', 'bHum', 'extTemp', 'extHum'];
+
   constructor(private http: HttpClient) { }
 
-  getRequest(url: any) {
-    let URL: string;
-    URL = url;
-    //this.http.get<Response>(URL).subscribe(data => {
-    //  this.data = data;
-    //  console.log(this.data);
-    //});
-    this.data = this.http.get(URL);
+  renderTable() {
+    this.hasData = true;
+    this.hasMessage = false;
   }
 
-  mostra() {
-    document.getElementsByTagName("table")[0].removeAttribute("hidden");
+  renderMessage() {
+    this.hasMessage = true;
+    this.hasData = false;
   }
 
+  get(url: any) {
+    this.http.get<Response>(url).subscribe(data => {
+      this.data = data;
+      this.requestSent = true;
+      Array.isArray(this.data.data) ? this.renderTable() : this.renderMessage();
+    });
+  }
 }
