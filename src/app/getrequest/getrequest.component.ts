@@ -148,7 +148,7 @@ export class GETrequestComponent implements OnInit {
       this.response.data.forEach(observation => {
         this.chartTempData.push([new Date(observation.datetime), observation.aTemp, observation.bTemp, observation.extTemp]);
         this.chartHumData.push([new Date(observation.datetime), observation.aHum, observation.bHum, observation.extHum]);
-        observation.datetime = this.datepipe.transform(observation.datetime, 'dd/MM/yyyy HH:mm:ss') as string;
+        observation.datetime = this.datepipe.transform(observation.datetime, 'yyyy-MM-dd HH:mm:ss') as string;
       });
 
       this.hasData = true;
