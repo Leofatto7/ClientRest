@@ -1,27 +1,61 @@
-# ClientREST
+# Come installare Visual Studio
+Seguire la seguente [guida](https://docs.microsoft.com/it-it/visualstudio/install/install-visual-studio?view=vs-2019) molto semplice e comprensibile.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
+# Come installare Angular
 
-## Development server
+## Installare NodeJS
+Scaricare l'[installer di Node.js](https://nodejs.org/en/download/) (versione LTS) per Windows.
+Per controllare la versione, aprire il prompt dei comandi (cmd) e scrivere il seguente comando: 
+```sh
+npm -v
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installare TypeScript
+Tramite prompt dei comandi, scrivere:
+```
+npm install -g typescript
+```
 
-## Code scaffolding
+## Installare la CLI di Angular
+Sempre tramite prompt dei comandi, scrivere:
+```
+npm install -g @angular/cli
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Comandi per creare e eseguire un progetto
 
-## Build
+## Creare un progetto
+Selezionare la cartella che si desidera utilizzare per la creazione del progetto, tramite il prompt dei comandi.
+Dopo aver selezionato la suddetta cartella, eseguire il comando:
+```
+ng new nome-progetto
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Eseguire il progetto
+Selezionare il percorso della cartella del progetto tramite il prompt dei comandi ed eseguire il comando: 
+```
+ng serve
+```
+Una volta completata l'operazione lasciando aperto il prompt, il vostro progetto sarà disponibile all'indirizzo: http://localhost:4200.
 
-## Running unit tests
+# Passi da seguire una volta importato un progetto nel proprio computer
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Aprire il progetto su Visual Studio
+Spostarci nella cartella del progetto tramite prompt e scrivere il comando:
+```
+code .
+```
+Questo aprirà il progetto organizzato in cartelle all'interno del suddetto ambiente di sviluppo.
 
-## Running end-to-end tests
+## Installare le dipendenze del progetto
+Sempre tramite prompt, ci sposteremo di nuovo nella cartella del progetto e eseguiremo il comando:
+```
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## In caso di un errore sconosciuto	
+Aprire la powershell di windows come amministratore ed eseguire il seguente comando: 
+```
+Set-ExecutionPolicy -ExecutionPolicy unrestricted -Scope CurrentUser
+```
+Fatto ciò il progetto alla sua esecuzione non dovrebbe avere più errori.
