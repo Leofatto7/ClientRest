@@ -1,26 +1,49 @@
-<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
-    <mat-label>Temperatura A</mat-label>
-    <input matInput #tempA required>
-</mat-form-field>
-<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
-    <mat-label>Umidit&agrave; A</mat-label>
-    <input matInput #humA required>
-</mat-form-field>
-<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
-    <mat-label>Temperatura B</mat-label>
-    <input matInput #tempB required>
-</mat-form-field>
-<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
-    <mat-label>Umidit&agrave; B</mat-label>
-    <input matInput #humB required>
-</mat-form-field>
-<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
-    <mat-label>Temperatura Esterna</mat-label>
-    <input matInput #tempExt required>
-</mat-form-field>
-<mat-form-field class="inputPUT" hideRequiredMarker appearance="fill">
-    <mat-label>Umidit&agrave; Esterna</mat-label>
-    <input matInput #humExt required>
-</mat-form-field>
-<br>
-<button (click)="putRequest(tempA.value,humA.value,tempB.value,humB.value,tempExt.value,humExt.value)" class="buttonPUT" mat-button>PUT</button><br>
+<div class="container mt-3">
+    <div class="row row-cols-1 justify-content-center">
+        <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>ID della misurazione</mat-label>
+                <input matInput type="number" class="input-number" #id required>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Temperatura A</mat-label>
+                <input matInput type="number" class="input-number" #aTemp>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Umidità A</mat-label>
+                <input matInput type="number" class="input-number" #aHum>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Temperatura B</mat-label>
+                <input matInput type="number" class="input-number" #bTemp>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Umidità B</mat-label>
+                <input matInput type="number" class="input-number" #bHum>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Temperatura Esterna</mat-label>
+                <input matInput type="number" class="input-number" #extTemp>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Umidità Esterna</mat-label>
+                <input matInput type="number" class="input-number" #extHum>
+            </mat-form-field>
+        </div>
+        <div class="col-auto">
+            <button mat-raised-button color="primary" (click)="put(id.value, aTemp.value, aHum.value, bTemp.value, bHum.value, extTemp.value, extHum.value)">Aggiorna</button>
+        </div>
+    </div>
+</div>

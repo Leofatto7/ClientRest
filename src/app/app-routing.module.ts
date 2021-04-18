@@ -6,6 +6,7 @@ import { POSTrequestComponent } from './postrequest/postrequest.component';
 import { PutrequestComponent } from './putrequest/putrequest.component';
 
 const routes: Routes = [
+  { path: '', component: GETrequestComponent },
   { path: 'get', component: GETrequestComponent },
   { path: 'post', component: POSTrequestComponent },
   { path: 'delete', component: DELETErequestComponent },

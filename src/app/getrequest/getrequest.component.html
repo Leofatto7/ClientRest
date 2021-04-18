@@ -1,53 +1,131 @@
-<div class="row">
-    <mat-form-field class="inputGET" hideRequiredMarker appearance="fill">
-        <mat-label>URL</mat-label>
-        <input matInput #url required>
-    </mat-form-field>
-    <button (click)="get(url.value);" class="buttonGET" mat-button>
-        GET
-    </button>
+<div class="container-fluid px-0">
+    <mat-tab-group>
+        <mat-tab label="Filtra la ricerca con un range">
+            <div class="row mx-0 my-3 align-items-center">
+                <div class="col-auto mb-lg-0 mb-3">
+                    <button mat-fab class="my-auto" color="primary" (click)="load(start.value, end.value, null, null, null, results1.value, sort1.value)">Cerca</button>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Imposta il range di ricerca</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate #start placeholder="Start date">
+                            <input matEndDate #end placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field>
+                        <mat-label>Inserisci il numero massimo di risultati</mat-label>
+                        <input type="number" matInput class="input-number" min="1" max="500" value="100" #results1>
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Ordinamento</mat-label>
+                        <mat-select [(value)]="defaultSorting" #sort1>
+                            <mat-option value="asc">Prime misurazioni</mat-option>
+                            <mat-option value="desc">Ultime misurazioni</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Filtra la ricerca per giorno, mese oppure anno">
+            <div class="row mx-0 my-3 align-items-center">
+                <div class="col-auto mb-lg-0 mb-3">
+                    <button mat-fab class="my-auto" color="primary" (click)="load(null, null, day.value, month.value, year.value, results2.value, sort2.value)">Cerca</button>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field>
+                        <mat-label>Inserisci un giorno</mat-label>
+                        <input type="number" matInput class="input-number" min="1" max="31" #day>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Inserisci un mese</mat-label>
+                        <input type="number" matInput class="input-number" min="1" max="12" #month>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Inserisci un anno</mat-label>
+                        <input type="number" matInput class="input-number" min="0" #year>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Inserisci il numero massimo di risultati</mat-label>
+                        <input type="number" matInput class="input-number" min="1" max="500" value="100" #results2>
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Ordinamento</mat-label>
+                        <mat-select [(value)]="defaultSorting" #sort2>
+                            <mat-option value="asc">Prime misurazioni</mat-option>
+                            <mat-option value="desc">Ultime misurazioni</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <mat-divider class="mb-3"></mat-divider>
+    <div class="row mx-2">
+        <div class="col-lg-6 mb-lg-0 mb-3">
+            <mat-card>
+                <google-chart style="width: 100%;" [type]="chartType" [data]="chartTempData" [columns]="chartTempColumns" [dynamicResize]="true" [options]="chartTempOptions" [formatters]="chartDateFormatters">
+                </google-chart>
+            </mat-card>
+        </div>
+        <div class="col-lg-6 ">
+            <mat-card>
+                <google-chart style="width: 100%;" [type]="chartType" [data]="chartHumData" [columns]="chartHumColumns" [dynamicResize]="true" [options]="chartHumOptions" [formatters]="chartDateFormatters">
+                </google-chart>
+            </mat-card>
+        </div>
+    </div>
 </div>
 
-<div *ngIf="requestSent">
-    <div *ngIf="hasData">
-        <table mat-table [dataSource]="data.data">
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay" [class.tableHeader]="true"></tr>
-            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let observation"> {{observation.id}} </td>
-            </ng-container>
-            <ng-container matColumnDef="datetime">
-                <th mat-header-cell *matHeaderCellDef> Datetime </th>
-                <td mat-cell *matCellDef="let observation"> {{observation.datetime}} </td>
-            </ng-container>
-            <ng-container matColumnDef="aTemp">
-                <th mat-header-cell *matHeaderCellDef> ATemp </th>
-                <td mat-cell *matCellDef="let observation"> {{observation.aTemp}} </td>
-            </ng-container>
-            <ng-container matColumnDef="aHum">
-                <th mat-header-cell *matHeaderCellDef> AHum </th>
-                <td mat-cell *matCellDef="let observation"> {{observation.aHum}} </td>
-            </ng-container>
-            <ng-container matColumnDef="bTemp">
-                <th mat-header-cell *matHeaderCellDef> BTemp </th>
-                <td mat-cell *matCellDef="let observation"> {{observation.bTemp}} </td>
-            </ng-container>
-            <ng-container matColumnDef="bHum">
-                <th mat-header-cell *matHeaderCellDef> BHum </th>
-                <td mat-cell *matCellDef="let observation"> {{observation.bHum}} </td>
-            </ng-container>
-            <ng-container matColumnDef="extTemp">
-                <th mat-header-cell *matHeaderCellDef> EXTTemp </th>
-                <td mat-cell *matCellDef="let observation"> {{observation.extTemp}} </td>
-            </ng-container>
-            <ng-container matColumnDef="extHum">
-                <th mat-header-cell *matHeaderCellDef> EXTHum </th>
-                <td mat-cell *matCellDef="let observation"> {{observation.extHum}} </td>
-            </ng-container>
-        </table>
-    </div>
-    <div *ngIf="hasMessage">
+<table mat-table [dataSource]="matData" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let observation"> {{observation.id}} </td>
+    </ng-container>
 
-    </div>
-</div>
+    <ng-container matColumnDef="datetime">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let observation"> {{observation.datetime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="aTemp">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Temperatura A </th>
+        <td mat-cell *matCellDef="let observation"> {{observation.aTemp}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="aHum">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Umidità A </th>
+        <td mat-cell *matCellDef="let observation"> {{observation.aHum}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bTemp">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Temperatura B </th>
+        <td mat-cell *matCellDef="let observation"> {{observation.bTemp}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bHum">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Umidità B </th>
+        <td mat-cell *matCellDef="let observation"> {{observation.bHum}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="extTemp">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Temperatura esterna </th>
+        <td mat-cell *matCellDef="let observation"> {{observation.extTemp}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="extHum">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Umidità esterna </th>
+        <td mat-cell *matCellDef="let observation"> {{observation.extHum}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="matColumns" [class.tableHeader]="true"></tr>
+    <tr mat-row *matRowDef="let row; columns: matColumns;"></tr>
+</table>

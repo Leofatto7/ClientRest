@@ -1,14 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="mat-elevation-z5 toolbar">
     <mat-toolbar-row>
-        <span>Client REST</span>
-
+        <span>Monitoraggio dati ambientali</span>
         <div class="spacer"></div>
-
-        <a mat-button routerLink="/get" routerLinkActive="active">GET</a>
-        <a mat-button routerLink="/post" routerLinkActive="active">POST</a>
-        <a mat-button routerLink="/delete" routerLinkActive="active">DELETE</a>
-        <a mat-button routerLink="/put" routerLinkActive="active">UPDATE</a>
-
+        <button mat-button routerLink="/get">Cerca</button>
+        <button mat-button routerLink="/post">Aggiungi</button>
+        <button mat-button routerLink="/put">Aggiorna</button>
+        <button mat-button routerLink="/delete">Elimina</button>
     </mat-toolbar-row>
 </mat-toolbar>
 

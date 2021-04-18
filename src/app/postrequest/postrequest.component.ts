@@ -1,36 +1,41 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
-
-interface Post{
-  datetime: string;
-  aTemp: string;
-  aHum: number;
-  bTemp: string;
-  bHum: number;
-  extTemp: string;
-  extHum: number;
-}
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as moment from 'moment';
+import { ConstantsService } from '../common/services/constants.service';
 
 @Component({
   selector: 'app-postrequest',
   templateUrl: './postrequest.component.html',
-  styleUrls: ['./postrequest.component.css']
+  styleUrls: ['./postrequest.component.css'],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
+  ]
 })
+
 export class POSTrequestComponent {
-  
-  constructor(private http: HttpClient) { }
+  apiURL: string;
 
-  postRequest(datetime:any,tempA:any,humA:any,tempB:any,humB:any,tempExt:any,humExt:any){
-
-    //let data="{datetime:"+datetime+","+"aTemp:"+tempA+","+"aHum:"+humA+","+"bTemp:"+tempB+","+"bHum:"+humB+","+"extTemp:"+tempExt+","+"extHum:"+humExt+"}";
-    let data="{datetime:"+"2022-01-01 18:00:00"+","+"aTemp:"+"16.70"+","+"aHum:"+97+","+"bTemp:"+"19.00"+","+"bHum:"+55+","+"extTemp:"+"22.20"+","+"extHum:"+39+"}";
-      
-    this.http.post<any>('http://localhost:4200/api/observation/create', { datetime:'2022-01-01 18:00:00', aTemp:'16.70',aHum:97, bTemp:'19.00',bHum:55, extTemp:'22.20',extHum:39 }).subscribe({
-      error: error => {
-      console.error('There was an error!', error);
-  }});
+  constructor(private http: HttpClient, private constants: ConstantsService) {
+    this.apiURL = constants.API_URL + '/observation/new';
   }
 
+  post(date: string, time:string, aTemp: string, aHum: string, bTemp: string, bHum: string, extTemp: string, extHum: string) {
+    this.http.post<any>(this.apiURL, {
+      datetime: moment(date + ' ' + time, 'DD/MM/yyyy HH:mm').format('yyyy-MM-DD HH:mm:ss'),
+      aTemp: aTemp ? aTemp : null,
+      aHum: aHum ? aHum : null,
+      bTemp: bTemp ? bTemp : null,
+      bHum: bHum ? bHum : null,
+      extTemp: extTemp ? extTemp : null,
+      extHum: extHum ? extHum : null
+    }).subscribe();
+  }
 }

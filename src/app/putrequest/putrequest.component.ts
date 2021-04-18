@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { ConstantsService } from '../common/services/constants.service';
 
 @Component({
   selector: 'app-putrequest',
@@ -7,17 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./putrequest.component.css']
 })
 export class PutrequestComponent {
+  apiURL: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private constants: ConstantsService) {
+    this.apiURL = constants.API_URL + '/observation/';
+  }
 
-  putRequest(tempA:any,humA:any,tempB:any,humB:any,tempExt:any,humExt:any){
-
-    //let data="{"+"aTemp:"+tempA+","+"aHum:"+humA+","+"bTemp:"+tempB+","+"bHum:"+humB+","+"extTemp:"+tempExt+","+"extHum:"+humExt+"}";
-    let data="{"+"aTemp:"+"16.70"+","+"aHum:"+97+","+"bTemp:"+"19.00"+","+"bHum:"+55+","+"extTemp:"+"22.20"+","+"extHum:"+39+"}";
-      
-    this.http.put<any>('http://localhost:4200/api/observation/905', { aTemp:0,aHum:0, bTemp:19.00,bHum:55, extTemp:22.20,extHum:39 } ).subscribe({
-      error: error => {
-      console.error('There was an error!', error);
-  }});
+  put(id: string, aTemp: string, aHum: string, bTemp: string, bHum: string, extTemp: string, extHum: string) {
+    this.http.put<any>(this.apiURL + id, {
+      aTemp: aTemp ? aTemp : null,
+      aHum: aHum ? aHum : null,
+      bTemp: bTemp ? bTemp : null,
+      bHum: bHum ? bHum : null,
+      extTemp: extTemp ? extTemp : null,
+      extHum: extHum ? extHum : null
+    }).subscribe();
   }
 }

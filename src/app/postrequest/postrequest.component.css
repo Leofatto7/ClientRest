@@ -1,10 +1,8 @@
-.inputPOST {
-    width: 500px;
-    margin-top: 20px;
-    margin-left: 20px;
+input.input-number::-webkit-outer-spin-button,
+input.input-number::-webkit-inner-spin-button {
+    display: none;
 }
 
-.buttonPOST {
-    margin-left: 20px;
-    background-color: rgba(38, 0, 255, 0.39);
+input.input-number {
+    -moz-appearance: textfield;
 }

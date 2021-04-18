@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GETrequestComponent } from './getrequest.component';
 
 describe('GETrequestComponent', () => {

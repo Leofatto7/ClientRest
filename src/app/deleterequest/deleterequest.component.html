@@ -1,6 +1,41 @@
-<mat-form-field class="inputDELETE" hideRequiredMarker appearance="fill">
-    <mat-label>URL</mat-label>
-    <input matInput #URLdelete required>
-</mat-form-field><br>
-
-<button (click)="deleteRequest(URLdelete.value)" class="buttonDELETE" mat-button>DELETE</button><br>
+<mat-tab-group>
+    <mat-tab label="Elimina per ID">
+        <div class="container mt-3">
+            <div class="row row-cols-1 justify-content-center">
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>ID della misurazione</mat-label>
+                        <input matInput #id required>
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <button mat-raised-button color="primary" (click)="delete(id.value, null, null)">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Elimina per data ed ora">
+        <div class="container mt-3">
+            <div class="row row-cols-1 justify-content-center">
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>Seleziona una data</mat-label>
+                        <input matInput [matDatepicker]="datepicker" #date required>
+                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>Seleziona un'ora</mat-label>
+                        <input matInput [ngxTimepicker]="hourpicker" #time [format]="24" required>
+                    </mat-form-field>
+                    <ngx-material-timepicker #hourpicker [minutesGap]="30"></ngx-material-timepicker>
+                </div>
+                <div class="col-auto">
+                    <button mat-raised-button color="primary" (click)="delete(null, date.value, time.value)">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>
